@@ -33,7 +33,10 @@ export default function Login() {
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => {}} style={[styles.button , styles.buttonOutline]}>
+        <TouchableOpacity
+          onPress={() => {}}
+          style={[styles.button, styles.buttonOutline]}
+        >
           <Text style={styles.buttonText}>Register</Text>
         </TouchableOpacity>
       </View>
@@ -46,5 +49,30 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+
+  inputContainer: {
+      width:'80%'
+
+  },
+  input: {
+      backgroundColor:"#fff",
+      paddingHorizontal:15,
+      paddingVertical:10,
+      marginTop:10,
+      borderRadius:10
+
+  },
+  buttonContainer: {
+
+  },
+  button: {
+      
+  },
+  buttonText: {
+
+  },
+  buttonOutline: {
+
   },
 });
