@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+import {auth} from '../firebase'
+
 export default function Login() {
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
@@ -60,19 +62,33 @@ const styles = StyleSheet.create({
       paddingHorizontal:15,
       paddingVertical:10,
       marginTop:10,
-      borderRadius:10
+      borderRadius:5
 
   },
   buttonContainer: {
+      width:'80%',
+      
+      
 
   },
   button: {
+    backgroundColor:"#0E73AA",
+    paddingHorizontal:15,
+    paddingVertical:15,
+    marginTop:10,
+    borderRadius:5,
+
+    
       
   },
   buttonText: {
+      color:"#fff",
+      textAlign:"center"
+    
 
   },
   buttonOutline: {
+    backgroundColor:'#0c6291'
 
   },
 });
