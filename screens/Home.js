@@ -19,7 +19,7 @@ export default function Home() {
 
       </View>
       <TouchableOpacity
-        style={{backgroundColor:"#FFD764", borderRadius:50,  width:'80%'}}
+        style={{backgroundColor:"#FFD764", borderRadius:50,  width:'80%', marginVertical:'10%'}}
         onPress={()=>{}}
       >
           <Text style={{color:"#3d3d3d", fontWeight:'700', fontSize:16, padding:16, textAlign:"center"}}>Start Quiz Now</Text>
@@ -30,28 +30,30 @@ export default function Home() {
 
 const styles = StyleSheet.create({
   container: {
-    height:"100%",    
+    flex:1,   
     alignItems: "center",
     backgroundColor:"#0c6291"
   },
   imageDimentions:{
-    marginVertical:50,
+    marginTop:70,
     width:"80%",
     height:"40%"
   },
-textContainer:{},
+textContainer:{
+  paddingHorizontal:23
+},
 mainText:{
   color:"#fff",
   fontSize:22,
   fontWeight:"600",
   marginTop:22,
-  paddingHorizontal:16
+  
 },
 secondaryText:{
   color:"#FFD764",
   marginBottom:56,
   paddingVertical:10,
-  paddingHorizontal:16
+ 
   
 },
 });
