@@ -1,11 +1,23 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import React from "react";
+import React, {useState, useEffect} from "react";
 
 export default function Quiz({ navigation }) {
+  const [ques, setQues] = useState();
+  const getQuestions = async () =>{
+      const url = 'https://opentdb.com/api.php?amount=11';
+      const res = await fetch(url);
+      const data = await res.json()
+      console.log(data.results)
+      setQues(data.results)
+  }
+ 
+  useEffect(()=>{
+     getQuestions();
+  },[])
   return (
     <View style={styles.quizContainer}>
       <View style={styles.top}>
-        <Text style={styles.screenTextH}>This is a simple question</Text>
+        <Text style={styles.screenTextH}>Q.This is a simple question</Text>
       </View>
 
       <View style={styles.options}>
@@ -80,6 +92,6 @@ const styles = StyleSheet.create({
   },
   buttonText:{
       fontWeight:"500",
-      fontSize:18
+      fontSize:16
   }
 });
