@@ -13,11 +13,16 @@ export default function Home() {
   return (
     <View style={styles.container}>
       <Image style={styles.imageDimentions} source={home}></Image>
+      <View style={styles.textContainer}>
+        <Text style={styles.mainText}>Welcome Mr. {name} to niksquiz</Text>
+        <Text style={styles.secondaryText}>Don't let your Sun Set till your last breadth. Try these quiz to measure your capabilities.</Text>
+
+      </View>
       <TouchableOpacity
-        style={{backgroundColor:"#3d3d3d", borderRadius:50}}
+        style={{backgroundColor:"#FFD764", borderRadius:50,  width:'80%'}}
         onPress={()=>{}}
       >
-          <Text style={{color:"#fff", fontWeight:'600', fontSize:18, padding:16}}>Start Quiz</Text>
+          <Text style={{color:"#3d3d3d", fontWeight:'700', fontSize:16, padding:16, textAlign:"center"}}>Start Quiz Now</Text>
       </TouchableOpacity>
     </View>
   );
@@ -33,5 +38,20 @@ const styles = StyleSheet.create({
     marginVertical:50,
     width:"80%",
     height:"40%"
-  }
+  },
+textContainer:{},
+mainText:{
+  color:"#fff",
+  fontSize:22,
+  fontWeight:"600",
+  marginTop:22,
+  paddingHorizontal:16
+},
+secondaryText:{
+  color:"#FFD764",
+  marginBottom:56,
+  paddingVertical:10,
+  paddingHorizontal:16
+  
+},
 });
