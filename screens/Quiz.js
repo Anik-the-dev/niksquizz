@@ -5,7 +5,7 @@ export default function Quiz({ navigation }) {
   const [ques, setQues] = useState();
   const [quesNo, setQuesNo] = useState(0);
   const getQuestions = async () => {
-    const url = "https://opentdb.com/api.php?amount=10&type=multiple";
+    const url = "https://opentdb.com/api.php?amount=10&type=multiple&encode=url3986";
     const res = await fetch(url);
     const data = await res.json();
     console.log(data.results);
@@ -27,7 +27,7 @@ const handleNextButton = ()=>{
       {ques && (
         <View style={styles.parent}>
           <View style={styles.top}>
-            <Text style={styles.screenTextH}>Q{quesNo+1}.{ques[quesNo].question}</Text>
+            <Text style={styles.screenTextH}>Q{quesNo+1}.{decodeURIComponent(ques[quesNo].question)}</Text>
           </View>
 
           <View style={styles.options}>
@@ -59,9 +59,9 @@ const handleNextButton = ()=>{
            { quesNo!==9 && <TouchableOpacity style={styles.button} onPress={handleNextButton}>
               <Text style={styles.buttonText}>Next</Text>
             </TouchableOpacity>}
-            {/* <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Result")}>
-          <Text>End</Text>
-        </TouchableOpacity> */}
+            {quesNo===9 && <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Result")}>
+          <Text style={styles.buttonText}>Show Result</Text>
+        </TouchableOpacity>}
           </View>
         </View>
       )}
@@ -106,6 +106,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontWeight: "500",
-    fontSize: 16,
+    fontSize: 18,
   },
 });
