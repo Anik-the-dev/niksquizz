@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -9,12 +9,30 @@ import {
 } from "react-native";
 
 import { auth } from "../firebase";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword  } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword ,onAuthStateChanged  } from "firebase/auth";
+import { useNavigation } from "@react-navigation/core";
 
 export default function Login() {
   // declare the states......
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigation = useNavigation();
+
+  useEffect(()=>{
+
+    const breakscreen = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // const uid = user.uid;
+        navigation.navigate("Home")
+        // ...
+      } else {
+        // User is signed out
+        // ...
+      }
+    });
+    return breakscreen;
+
+  },[])
 
   const handleRegister = () => {
     createUserWithEmailAndPassword(auth, email, password)
