@@ -43,6 +43,8 @@ export default function Quiz({ navigation }) {
   const generateOptionsAndShuffle = (_question) => {
     const options = [..._question.incorrect_answers];
     options.push(_question.correct_answer);
+    console.log(_question)
+    console.log(options)
 
     shuffleOptions(options);
 
@@ -50,11 +52,12 @@ export default function Quiz({ navigation }) {
   };
 
   const handlSelectedOption = (_option) => {
+    console.log(_option === ques[quesNo].correct_answer)
     if (_option === ques[quesNo].correct_answer) {
       setScore(score + 10);
     }
     if (quesNo !== 9) {
-      setQues(quesNo + 1);
+      setQuesNo(quesNo + 1);
       setOptions(generateOptionsAndShuffle(ques[quesNo + 1]));
     }
     if (quesNo === 9) {
@@ -127,7 +130,7 @@ export default function Quiz({ navigation }) {
               {quesNo === 9 && (
                 <TouchableOpacity
                   style={styles.button}
-                  onPress={() => navigation.navigate("Result")}
+                  onPress={handleShowResult}
                 >
                   <Text style={styles.buttonText}>Show Result</Text>
                 </TouchableOpacity>
