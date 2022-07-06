@@ -2,7 +2,7 @@ import { StyleSheet, Text, View,Image, TouchableOpacity } from "react-native";
 import React from "react";
 import home from '../images/home.png'
 
-export default function Home() {
+export default function Home({navigation}) {
   // random name generator............
   const names = ["Anik", "Joffer", "Moyank", "Charlee", "Premo", "Levos", "Thrive"];
   const getRandom = () => {
@@ -20,7 +20,7 @@ export default function Home() {
       </View>
       <TouchableOpacity
         style={{backgroundColor:"#FFD764", borderRadius:50,  width:'80%', marginVertical:'10%'}}
-        onPress={()=>{}}
+        onPress={()=>{navigation.navigate("Quiz")}}
       >
           <Text style={{color:"#3d3d3d", fontWeight:'700', fontSize:16, padding:16, textAlign:"center"}}>Start Quiz Now</Text>
       </TouchableOpacity>
