@@ -16,13 +16,18 @@ export default function Quiz({ navigation }) {
     getQuestions();
   }, []);
 
+//handle next button........
+const handleNextButton = ()=>{
+    setQuesNo(quesNo+1)
+}
+
   console.log(ques);
   return (
     <View style={styles.quizContainer}>
       {ques && (
         <View style={styles.parent}>
           <View style={styles.top}>
-            <Text style={styles.screenTextH}>Q.{ques[quesNo].question}</Text>
+            <Text style={styles.screenTextH}>Q{quesNo+1}.{ques[quesNo].question}</Text>
           </View>
 
           <View style={styles.options}>
@@ -51,7 +56,7 @@ export default function Quiz({ navigation }) {
             <TouchableOpacity style={styles.button}>
               <Text style={styles.buttonText}>Skip</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={handleNextButton}>
               <Text style={styles.buttonText}>Next</Text>
             </TouchableOpacity>
             {/* <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Result")}>
