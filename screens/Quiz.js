@@ -5,7 +5,8 @@ export default function Quiz({ navigation }) {
   const [ques, setQues] = useState();
   const [quesNo, setQuesNo] = useState(0);
   const getQuestions = async () => {
-    const url = "https://opentdb.com/api.php?amount=10&type=multiple&encode=url3986";
+    const url =
+      "https://opentdb.com/api.php?amount=10&type=multiple&encode=url3986";
     const res = await fetch(url);
     const data = await res.json();
     console.log(data.results);
@@ -16,10 +17,18 @@ export default function Quiz({ navigation }) {
     getQuestions();
   }, []);
 
-//handle next button........
-const handleNextButton = ()=>{
-    setQuesNo(quesNo+1)
-}
+  // array suffle for suffling the quiz question
+  const shuffleoptions = (opt) => {
+    for (let i = opt.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [opt[i], opt[j]] = [opt[j], opt[i]];
+    }
+  };
+
+  //handle next button........
+  const handleNextButton = () => {
+    setQuesNo(quesNo + 1);
+  };
 
   console.log(ques);
   return (
@@ -27,7 +36,9 @@ const handleNextButton = ()=>{
       {ques && (
         <View style={styles.parent}>
           <View style={styles.top}>
-            <Text style={styles.screenTextH}>Q{quesNo+1}.{decodeURIComponent(ques[quesNo].question)}</Text>
+            <Text style={styles.screenTextH}>
+              Q{quesNo + 1}.{decodeURIComponent(ques[quesNo].question)}
+            </Text>
           </View>
 
           <View style={styles.options}>
@@ -56,12 +67,22 @@ const handleNextButton = ()=>{
             <TouchableOpacity style={styles.button}>
               <Text style={styles.buttonText}>Skip</Text>
             </TouchableOpacity>
-           { quesNo!==9 && <TouchableOpacity style={styles.button} onPress={handleNextButton}>
-              <Text style={styles.buttonText}>Next</Text>
-            </TouchableOpacity>}
-            {quesNo===9 && <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Result")}>
-          <Text style={styles.buttonText}>Show Result</Text>
-        </TouchableOpacity>}
+            {quesNo !== 9 && (
+              <TouchableOpacity
+                style={styles.button}
+                onPress={handleNextButton}
+              >
+                <Text style={styles.buttonText}>Next</Text>
+              </TouchableOpacity>
+            )}
+            {quesNo === 9 && (
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate("Result")}
+              >
+                <Text style={styles.buttonText}>Show Result</Text>
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       )}
@@ -75,8 +96,8 @@ const styles = StyleSheet.create({
     marginTop: "20%",
     marginHorizontal: 22,
   },
-  parent:{
-      flex:1
+  parent: {
+    flex: 1,
   },
   top: {},
   options: {
