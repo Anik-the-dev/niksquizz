@@ -56,9 +56,9 @@ const handleNextButton = ()=>{
             <TouchableOpacity style={styles.button}>
               <Text style={styles.buttonText}>Skip</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={handleNextButton}>
+           { quesNo!==9 && <TouchableOpacity style={styles.button} onPress={handleNextButton}>
               <Text style={styles.buttonText}>Next</Text>
-            </TouchableOpacity>
+            </TouchableOpacity>}
             {/* <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Result")}>
           <Text>End</Text>
         </TouchableOpacity> */}
