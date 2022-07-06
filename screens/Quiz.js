@@ -54,7 +54,7 @@ export default function Quiz({ navigation }) {
   const handlSelectedOption = (_option) => {
     console.log(_option === ques[quesNo].correct_answer)
     if (_option === ques[quesNo].correct_answer) {
-      setScore(score + 10);
+      setScore(score);
     }
     if (quesNo !== 9) {
       setQuesNo(quesNo + 1);
