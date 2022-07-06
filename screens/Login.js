@@ -9,7 +9,7 @@ import {
 } from "react-native";
 
 import { auth } from "../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword  } from "firebase/auth";
 
 export default function Login() {
   // declare the states......
@@ -22,12 +22,32 @@ export default function Login() {
         // Signed in
         const user = userCredential.user;
         console.log(user.email)
+        alert("Registration Successful")
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorMessage)
+        alert(errorMessage)
+        // ..
+      });
+  };
+
+  const handleLogin = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user.email)
+        alert("Login Successful")
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage)
+        alert(errorMessage)
         // ..
       });
   };
@@ -52,7 +72,7 @@ export default function Login() {
 
       {/* adding login and register btn */}
       <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={() => {}} style={styles.button}>
+        <TouchableOpacity onPress={handleLogin} style={styles.button}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
 
