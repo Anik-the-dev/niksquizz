@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -8,22 +8,43 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import {auth} from '../firebase'
+import { auth } from "../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 export default function Login() {
+  // declare the states......
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleRegister = () => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user.email)
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage)
+        // ..
+      });
+  };
+
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       {/* adding email and pass input field */}
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
-          //value={ } onChangeText={text=> }
+          value={email} onChangeText={text=> setEmail(text) }
           style={styles.input}
         />
 
         <TextInput
           placeholder="Password"
-          //value={ } onChangeText={text=> }
+          value={password} onChangeText={text=>setPassword(text) }
           style={styles.input}
           secureTextEntry
         />
@@ -36,7 +57,7 @@ export default function Login() {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => {}}
+          onPress={handleRegister}
           style={[styles.button, styles.buttonOutline]}
         >
           <Text style={styles.buttonText}>Register</Text>
@@ -54,41 +75,30 @@ const styles = StyleSheet.create({
   },
 
   inputContainer: {
-      width:'80%'
-
+    width: "80%",
   },
   input: {
-      backgroundColor:"#fff",
-      paddingHorizontal:15,
-      paddingVertical:10,
-      marginTop:10,
-      borderRadius:5
-
+    backgroundColor: "#fff",
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    marginTop: 10,
+    borderRadius: 5,
   },
   buttonContainer: {
-      width:'80%',
-      
-      
-
+    width: "80%",
   },
   button: {
-    backgroundColor:"#0E73AA",
-    paddingHorizontal:15,
-    paddingVertical:15,
-    marginTop:10,
-    borderRadius:5,
-
-    
-      
+    backgroundColor: "#0E73AA",
+    paddingHorizontal: 15,
+    paddingVertical: 15,
+    marginTop: 10,
+    borderRadius: 5,
   },
   buttonText: {
-      color:"#fff",
-      textAlign:"center"
-    
-
+    color: "#fff",
+    textAlign: "center",
   },
   buttonOutline: {
-    backgroundColor:'#0c6291'
-
+    backgroundColor: "#0c6291",
   },
 });
