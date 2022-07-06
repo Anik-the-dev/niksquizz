@@ -15,7 +15,6 @@ export default function Quiz({ navigation }) {
       "https://opentdb.com/api.php?amount=10&type=multiple&encode=url3986";
     const res = await fetch(url);
     const data = await res.json();
-    console.log(data.results);
     setQues(data.results);
     setOptions(generateOptionsAndShuffle(data.results[0]));
     setLoading(false);
@@ -43,8 +42,7 @@ export default function Quiz({ navigation }) {
   const generateOptionsAndShuffle = (_question) => {
     const options = [..._question.incorrect_answers];
     options.push(_question.correct_answer);
-    console.log(_question)
-    console.log(options)
+    console.log(_question.correct_answer)
 
     shuffleOptions(options);
 
@@ -54,7 +52,7 @@ export default function Quiz({ navigation }) {
   const handlSelectedOption = (_option) => {
     console.log(_option === ques[quesNo].correct_answer)
     if (_option === ques[quesNo].correct_answer) {
-      setScore(score);
+      setScore(score+1);
     }
     if (quesNo !== 9) {
       setQuesNo(quesNo + 1);
@@ -95,33 +93,33 @@ export default function Quiz({ navigation }) {
 
             <View style={styles.options}>
               <View>
-                <TouchableOpacity onPress={()=>handlSelectedOption(options[0])}>
+                <TouchableOpacity  style={styles.button} onPress={()=>handlSelectedOption(options[0])}>
                   <Text style={styles.screenTextP}>{decodeURIComponent(options[0])}</Text>
                 </TouchableOpacity>
               </View>
               <View>
-                <TouchableOpacity onPress={()=>handlSelectedOption(options[1])}>
+                <TouchableOpacity style={styles.button} onPress={()=>handlSelectedOption(options[1])}>
                   <Text style={styles.screenTextP}>{decodeURIComponent(options[1])}</Text>
                 </TouchableOpacity>
               </View>
               <View>
-                <TouchableOpacity onPress={()=>handlSelectedOption(options[2])}>
+                <TouchableOpacity style={styles.button} onPress={()=>handlSelectedOption(options[2])}>
                   <Text style={styles.screenTextP}>{decodeURIComponent(options[2])}</Text>
                 </TouchableOpacity>
               </View>
               <View>
-                <TouchableOpacity onPress={()=>handlSelectedOption(options[3])}>
+                <TouchableOpacity style={styles.button} onPress={()=>handlSelectedOption(options[3])}>
                   <Text style={styles.screenTextP}>{decodeURIComponent(options[3])}</Text>
                 </TouchableOpacity>
               </View>
             </View>
             <View style={styles.bottom}>
-              <TouchableOpacity style={styles.button}>
+              <TouchableOpacity style={styles.buttonSmall} onPress={()=>alert("Can't Skip")}>
                 <Text style={styles.buttonText}>Skip</Text>
               </TouchableOpacity>
               {quesNo !== 9 && (
                 <TouchableOpacity
-                  style={styles.button}
+                  style={styles.buttonSmall}
                   onPress={handleNextButton}
                 >
                   <Text style={styles.buttonText}>Next</Text>
@@ -129,7 +127,7 @@ export default function Quiz({ navigation }) {
               )}
               {quesNo === 9 && (
                 <TouchableOpacity
-                  style={styles.button}
+                  style={styles.buttonSmall}
                   onPress={handleShowResult}
                 >
                   <Text style={styles.buttonText}>Show Result</Text>
@@ -155,16 +153,19 @@ const styles = StyleSheet.create({
   top: {},
   options: {
     flex: 1,
-    paddingHorizontal: 16,
+    marginTop:16,
+    paddingHorizontal: 2,
   },
   screenTextH: {
     fontSize: 22,
     fontWeight: "600",
   },
   screenTextP: {
-    paddingTop: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
     fontSize: 16,
     fontWeight: "500",
+    color:"#fff"
   },
   bottom: {
     marginBottom: 12,
@@ -173,13 +174,21 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   button: {
-    backgroundColor: "#FFD764",
+    marginVertical:10,
+    backgroundColor: "#0E73AA",
     borderRadius: 5,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
+
+  },
+  buttonSmall:{
+    paddingVertical:8,
+    paddingHorizontal:16,
+    backgroundColor: "#0E73AA",
+    borderRadius: 5,
+    marginVertical:10,
   },
   buttonText: {
     fontWeight: "500",
     fontSize: 18,
+    color:"#fff"
   },
 });

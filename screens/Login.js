@@ -71,7 +71,12 @@ export default function Login() {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
+    // <KeyboardAvoidingView style={styles.container} behavior="padding">
+    <View style={styles.container}>
+      <View>
+        <Text style={styles.brand}>Niks Quiz</Text>
+      </View>
+
       {/* adding email and pass input field */}
       <View style={styles.inputContainer}>
         <TextInput
@@ -101,7 +106,7 @@ export default function Login() {
           <Text style={styles.buttonText}>Register</Text>
         </TouchableOpacity>
       </View>
-    </KeyboardAvoidingView>
+    </View>
   );
 }
 
@@ -110,6 +115,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  brand:{
+    textAlign:"center",
+    marginVertical:22,
+    fontSize:36,
+    fontWeight:"600",
+    color:"#0E73AA"
   },
 
   inputContainer: {
