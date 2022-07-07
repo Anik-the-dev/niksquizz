@@ -8,11 +8,11 @@ export default function Home({ navigation, route }) {
   const [userRandomName, setUserRandomName] = useState("");
 
   // set the data to asyncStorage
-  const setUserName = async (pname) => {
+  const setUserName = async () => {
     try {
       await AsyncStorage.setItem("@userName", pname);
       await getUserName();
-      navigation.navigate("Quiz" , {userRandomName});
+      await navigation.navigate("Quiz" , {userRandomName, pname});
     } catch (e) {
       console.log("Asyncstorage error", e);
     }
@@ -37,7 +37,7 @@ export default function Home({ navigation, route }) {
           measure your capabilities.
         </Text>
       </View>
-      <TouchableOpacity style={styles.button} onPress={()=>setUserName(pname)}>
+      <TouchableOpacity style={styles.button} onPress={setUserName}>
         <Text
           style={{
             color: "#3d3d3d",

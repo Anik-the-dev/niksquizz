@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React, { useState, useEffect } from "react";
 
 export default function Quiz({ navigation, route }) {
-  const { userRandomName } = route.params;
+  const { userRandomName,pname } = route.params;
   const [ques, setQues] = useState();
   const [quesNo, setQuesNo] = useState(0);
   const [options, setOptions] = useState([]);
@@ -69,6 +69,7 @@ export default function Quiz({ navigation, route }) {
     navigation.navigate("Result", {
       score,
       userRandomName,
+      pname
     });
   };
 
@@ -82,7 +83,7 @@ export default function Quiz({ navigation, route }) {
   let timer;
   useEffect(() => {
     if (quesNo !== 9) {
-      timer = setTimeout(() => setQuesNo(quesNo + 1), 15000);
+      timer = setTimeout(() => setQuesNo(quesNo + 1), 45000);
       console.log("time", timer);
     } else {
       clearTimeout(timer);
@@ -109,7 +110,7 @@ export default function Quiz({ navigation, route }) {
             <View style={styles.top}>
               <View style={styles.timerbg}>
                 <Text style={styles.screenTextHH}>
-                  Time: 15s. After 15s the question will vanish.
+                  Time: 45s. After 45s this question will be vanished.
                 </Text>
               </View>
 

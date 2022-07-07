@@ -2,10 +2,11 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
 export default function Result({ navigation, route }) {
-  const { score,userRandomName } = route.params;
+  const { score,userRandomName,pname } = route.params;
+  console.log("userRandomName",pname)
   return (
     <View style={styles.container}> 
-      <Text style={styles.mainText}>Hello Mr. {userRandomName}: You have scored: {score} out of 10</Text>
+      <Text style={styles.mainText}>Hello Mr. {userRandomName || pname}: You have scored: {score} out of 10</Text>
     </View>
   );
 }
