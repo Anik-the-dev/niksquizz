@@ -1,39 +1,44 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import home from "../images/home.png";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function Home({ navigation }) {
-  // random name generator............
-  const names = [
-    "Anik",
-    "Joffer",
-    "Moyank",
-    "Charlee",
-    "Premo",
-    "Levos",
-    "Thrive",
-  ];
-  const getRandom = () => {
-    const a = names[Math.floor(Math.random() * names.length)];
-    return a;
+export default function Home({ navigation, route }) {
+  const { pname } = route.params;
+  const [userRandomName, setUserRandomName] = useState("");
+
+  // set the data to asyncStorage
+  const setUserName = async (pname) => {
+    try {
+      await AsyncStorage.setItem("@userName", pname);
+      await getUserName();
+      navigation.navigate("Quiz");
+    } catch (e) {
+      console.log("Asyncstorage error", e);
+    }
   };
-  const name = getRandom();
+
+  // get async Storage Data............
+  const getUserName = async () => {
+    const getName = await AsyncStorage.getItem("@userName");
+    if (getName !== null) {
+      setUserRandomName(getName);
+      console.log("randomnamego", getName);
+    }
+  };
+
+  console.log("randomname", userRandomName);
   return (
     <View style={styles.container}>
       <Image style={styles.imageDimentions} source={home}></Image>
       <View style={styles.textContainer}>
-        <Text style={styles.mainText}>Welcome Mr. {name} to niksquiz</Text>
+        <Text style={styles.mainText}>Welcome Mr. {pname} to niksquiz</Text>
         <Text style={styles.secondaryText}>
           Don't let your Sun Set till your last breadth. Try these quiz to
           measure your capabilities.
         </Text>
       </View>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          navigation.navigate("Quiz");
-        }}
-      >
+      <TouchableOpacity style={styles.button} onPress={()=>setUserName(pname)}>
         <Text
           style={{
             color: "#3d3d3d",

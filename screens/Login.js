@@ -13,17 +13,37 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword ,onAuthState
 import { useNavigation } from "@react-navigation/core";
 
 export default function Login() {
+  
   // declare the states......
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
 
+    // random name generator............
+    const names = [
+      "Anik",
+      "Joffer",
+      "Moyank",
+      "Charlee",
+      "Premo",
+      "Levos",
+      "Thrive",
+    ];
+    const getRandom = () => {
+      const a = names[Math.floor(Math.random() * names.length)];
+      return a;
+    };
+    
+   
+
   useEffect(()=>{
 
     const breakscreen = onAuthStateChanged(auth, (user) => {
       if (user) {
+        const pname = getRandom();
         // const uid = user.uid;
-        navigation.navigate("Home")
+        
+        navigation.navigate("Home" , {pname})
         // ...
       } else {
         // User is signed out
