@@ -73,19 +73,22 @@ export default function Quiz({ navigation, route }) {
   };
 
   //  set time out function
+  // const [count, setCount] = useState(3)
+  // const internal = () =>{
+  //   setInterval(()=>setCount(count-1), 1000);
+  //   setQuesNo(quesNo + 1)
+  // }
+
   let timer;
   useEffect(() => {
-    if (quesNo !==9){
-      timer = setTimeout(()=>setQuesNo(quesNo + 1), 20000);
-      console.log("time",timer)
+    if (quesNo !== 9) {
+      timer = setTimeout(() => setQuesNo(quesNo + 1), 15000);
+      console.log("time", timer);
+    } else {
+      clearTimeout(timer);
+      console.log("time end", timer);
     }
-    else{ clearTimeout(timer)
-      console.log("time end",timer)
-     }
-    
   }, [quesNo]);
-
-  
 
   return (
     <View style={styles.quizContainer}>
@@ -104,6 +107,12 @@ export default function Quiz({ navigation, route }) {
         ques && (
           <View style={styles.parent}>
             <View style={styles.top}>
+              <View style={styles.timerbg}>
+                <Text style={styles.screenTextHH}>
+                  Time: 15s. After 15s the question will vanish.
+                </Text>
+              </View>
+
               <Text style={styles.screenTextH}>
                 Q{quesNo + 1}.{decodeURIComponent(ques[quesNo].question)}
               </Text>
@@ -200,6 +209,20 @@ const styles = StyleSheet.create({
   screenTextH: {
     fontSize: 22,
     fontWeight: "600",
+  },
+  timerbg:{
+    
+    marginVertical: 16,
+   
+
+  },
+  screenTextHH: {
+    fontSize: 18,
+    color: "#3d3d3d",
+    backgroundColor: "#FFD764",
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    fontWeight: "700",
   },
   screenTextP: {
     paddingVertical: 10,
