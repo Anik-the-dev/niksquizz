@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React, { useState, useEffect } from "react";
 
-export default function Quiz({ navigation , route }) {
-  const {userRandomName} = route.params
+export default function Quiz({ navigation, route }) {
+  const { userRandomName } = route.params;
   const [ques, setQues] = useState();
   const [quesNo, setQuesNo] = useState(0);
   const [options, setOptions] = useState([]);
@@ -67,9 +67,25 @@ export default function Quiz({ navigation , route }) {
 
   const handleShowResult = () => {
     navigation.navigate("Result", {
-      score, userRandomName
+      score,
+      userRandomName,
     });
   };
+
+  //  set time out function
+  let timer;
+  useEffect(() => {
+    if (quesNo !==9){
+      timer = setTimeout(()=>setQuesNo(quesNo + 1), 20000);
+      console.log("time",timer)
+    }
+    else{ clearTimeout(timer)
+      console.log("time end",timer)
+     }
+    
+  }, [quesNo]);
+
+  
 
   return (
     <View style={styles.quizContainer}>
