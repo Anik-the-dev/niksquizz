@@ -12,7 +12,7 @@ export default function Home({ navigation, route }) {
     try {
       await AsyncStorage.setItem("@userName", pname);
       await getUserName();
-      navigation.navigate("Quiz");
+      navigation.navigate("Quiz" , {userRandomName});
     } catch (e) {
       console.log("Asyncstorage error", e);
     }
@@ -27,7 +27,6 @@ export default function Home({ navigation, route }) {
     }
   };
 
-  console.log("randomname", userRandomName);
   return (
     <View style={styles.container}>
       <Image style={styles.imageDimentions} source={home}></Image>

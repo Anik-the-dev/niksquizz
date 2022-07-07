@@ -2,10 +2,10 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
 export default function Result({ navigation, route }) {
-  const { score } = route.params;
+  const { score,userRandomName } = route.params;
   return (
     <View style={styles.container}> 
-      <Text style={styles.mainText}>Result: {score} out of 10</Text>
+      <Text style={styles.mainText}>Hello Mr. {userRandomName}: You have scored: {score} out of 10</Text>
     </View>
   );
 }
@@ -27,9 +27,10 @@ const styles = StyleSheet.create({
     },
     mainText: {
       color: "#fff",
-      fontSize: 32,
+      fontSize: 28,
       fontWeight: "600",
       marginTop: 22,
+      marginHorizontal:16
     },
     secondaryText: {
       color: "#FFD764",

@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React, { useState, useEffect } from "react";
 
-export default function Quiz({ navigation }) {
+export default function Quiz({ navigation , route }) {
+  const {userRandomName} = route.params
   const [ques, setQues] = useState();
   const [quesNo, setQuesNo] = useState(0);
   const [options, setOptions] = useState([]);
@@ -66,7 +67,7 @@ export default function Quiz({ navigation }) {
 
   const handleShowResult = () => {
     navigation.navigate("Result", {
-      score: score,
+      score, userRandomName
     });
   };
 
