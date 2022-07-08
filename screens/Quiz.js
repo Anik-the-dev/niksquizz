@@ -37,8 +37,14 @@ export default function Quiz({ navigation, route }) {
 
   //handle Skip button........
   const handleSkipButton = () => {
-    setQuesNo(quesNo + 1);
-    setOptions(generateOptionsAndShuffle(ques[quesNo + 1]));
+    if(quesNo<=8){
+      setQuesNo(quesNo + 1);
+      setOptions(generateOptionsAndShuffle(ques[quesNo + 1]));
+    } else{
+      handleShowResult();
+
+    }
+
   };
 
   // suffle the options
