@@ -77,12 +77,6 @@ export default function Quiz({ navigation, route }) {
 
   //  set time out function
 
-  // const [count, setCount] = useState(3)
-  // const internal = () =>{
-  //   setInterval(()=>setCount(count-1), 1000);
-  //   setQuesNo(quesNo + 1)
-  // }
-
   let temp = false
   if(quesNo>=9){
     temp = true
