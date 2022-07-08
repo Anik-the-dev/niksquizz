@@ -2,12 +2,14 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React, { useState, useEffect } from "react";
 
 export default function Quiz({ navigation, route }) {
-  const { userRandomName,pname } = route.params;
+  const { userRandomName, pname } = route.params;
   const [ques, setQues] = useState();
   const [quesNo, setQuesNo] = useState(0);
+  const [count, setCount] = useState(0);
   const [options, setOptions] = useState([]);
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(false);
+  let timer;
 
   //   fetch quiz question api...................
   const getQuestions = async () => {
@@ -43,7 +45,7 @@ export default function Quiz({ navigation, route }) {
   const generateOptionsAndShuffle = (_question) => {
     const options = [..._question.incorrect_answers];
     options.push(_question.correct_answer);
-    console.log(_question.correct_answer);
+    console.log("answer",_question.correct_answer);
 
     shuffleOptions(options);
 
@@ -69,27 +71,46 @@ export default function Quiz({ navigation, route }) {
     navigation.navigate("Result", {
       score,
       userRandomName,
-      pname
+      pname,
     });
   };
 
   //  set time out function
+
   // const [count, setCount] = useState(3)
   // const internal = () =>{
   //   setInterval(()=>setCount(count-1), 1000);
   //   setQuesNo(quesNo + 1)
   // }
 
-  let timer;
-  useEffect(() => {
-    if (quesNo !== 9) {
-      timer = setTimeout(() => setQuesNo(quesNo + 1), 45000);
-      console.log("time", timer);
-    } else {
-      clearTimeout(timer);
-      console.log("time end", timer);
+  let temp = false
+  if(quesNo>=9){
+    temp = true
+  }
+  const setNiksTimer = (temp) => {
+    console.log("chk",temp)
+    if(!temp){
+      console.log("Timer On",temp)
+      setQuesNo((quesNo) => quesNo + 1);
     }
-  }, [quesNo]);
+    else{
+      console.log("Timer off again")
+      clearInterval(timer);
+
+    }
+
+  };
+
+
+  useEffect(() => {
+    timer = setInterval(()=>setNiksTimer(temp), 45000);
+    return () => {
+      console.log("Timer off")
+      clearInterval(timer);
+    };
+  }, [temp]);
+
+ 
 
   return (
     <View style={styles.quizContainer}>
@@ -211,11 +232,8 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: "600",
   },
-  timerbg:{
-    
+  timerbg: {
     marginVertical: 16,
-   
-
   },
   screenTextHH: {
     fontSize: 18,
