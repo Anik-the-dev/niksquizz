@@ -96,6 +96,7 @@ export default function Quiz({ navigation, route }) {
     else{
       console.log("Timer off again")
       clearInterval(timer);
+      
 
     }
 
